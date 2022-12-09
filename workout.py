@@ -1,3 +1,9 @@
+import json
+
+class BaseClass(object):
+    def __init__(self, classtype):
+        self._type = classtype
+
 class class_erg:
     def __init__(self, meters, split, SR, HR, time):
         self.meters = meters
@@ -70,19 +76,46 @@ def publish_workout():
     #publish to beautiful text file
     i = 123
 
-def new_workout_type():
-    #update the dictionary
-    #update the classes_map
-    #create a csv with proper columns
-    i = 123
+def new_workout_type(mydict1,file1,mydict2,file2):
+    #update the workout dictionary
+    #create the dynamic class
+    #update the classes_map dictionary
+    key_name = input("Proper name? ")
+    string_of_names = str(input("Other possible names, sperated by comma with no space: "))
+    list_of_names = str.string_of_names(",")
+    mydict1[key_name]=list_of_names
+    json.dump(mydict1, file1)
+
+    #dynamical class creation, see create_class function, this isnt creating any objects yet, just the constructor
+    map_class_name = create_class(key_name,argnames.split(","))
+
+    mydict2[key_name]=map_class_name
+    json.dump(mydict2, file2)
+
+def create_class(class_name, argnames, BaseClass=BaseClass):
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        BaseClass.__init__(self, name[:-len("Class")])
+    newclass = type(name, (BaseClass,),{"__init__": __init__})
+    return newclass
 
 
-#list of names for known workouts, can grow
-dic_known_workouts = {
-    'dic_erg_names' : ['Erg','erg','erging','rower'],
-    'dic_run_names' : ['Run','run','jog','Jog']
-}
-classes_map = {'dic_erg_names': class_erg, 'dic_run_names': class_run}
+
+
+
+
+
+
+
+
+
+
+with open('dic_known_workouts.json') as f_dic_known_workouts:
+    dic_known_workouts = json.load(f_dic_known_workouts)
+with open('classes_map.json') as f_classes_map:
+    classes_map = json.load(f_classes_map)
+
 
 #the first user prompt after starting the code
 purpose = input('Update (U) or Examine (E)? ')
