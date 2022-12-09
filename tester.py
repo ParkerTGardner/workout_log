@@ -18,18 +18,9 @@ dic_known_workouts = {
     'dic_run_names' : ['Run','run','jog','Jog']
 }
 sport = [k for k, v in dic_known_workouts.items() if v == exercise]
-classes = {"erg": erg, "run": run}
-obj = classes[sport]
-
-#list_of_keys = [key
-#    for key, list_of_values in dic_known_workouts.items()
-#    if exercise in list_of_values]
-#if list_of_keys:
 
 
-class Foo:
-    ...
 
-class Bar:
-    ...
+
+
 
