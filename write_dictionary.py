@@ -1,41 +1,15 @@
 import json
-
+import pickle
 #import os
-#from os.path.expanduser("~/Desktop/workout_log/workout_log.py") import class_erg, class_run
+#import sys
 
-class class_erg:
-    def __init__(self, meters, split, SR, HR, time):
-        self.meters = meters
-        self.split = split
-        self.SR = SR
-        self.HR = HR
-        self.time = time
-    @classmethod
-    def from_input(cls):
-        return cls(
-            input('meters: '),
-            input('split: '), 
-            input('SR: '),
-            input('HR: '),
-            input('time: ')
-        )
+#print (os.getcwd())
+#my_dir = os.path.expanduser('~/Desktop/shape_log/')
+# sys.path is a list of absolute path strings.
+#sys.path.append(my_dir+'shape_log.py')
+#print(my_dir+'shape_log.py')
 
-class class_run:
-    def __init__(self, miles, time, HR, elevationChange):
-        self.miles = miles
-        self.time = time
-        self.HR = HR
-        self.elevationChange = elevationChange
-    @classmethod
-    def from_input(cls):
-        return cls(
-            input('miles: '),
-            input('time: '), 
-            input('HR: '),
-            input('elevationChange: ')
-        )
-
-
+from class_holder import class_erg, class_run
 
 #list of names for known workouts, can grow
 dic_known_workouts = {
@@ -45,10 +19,10 @@ dic_known_workouts = {
 with open('dic_known_workouts.json', 'w') as f_dic_known_workouts:
     json.dump(dic_known_workouts, f_dic_known_workouts)
 
-# classes_map = {
-#     'dic_erg_names': class_erg, 
-#     'dic_run_names': class_run
-# }
+classes_map = {
+    'dic_erg_names': class_erg,
+    'dic_run_names': class_run
+}
 
-# with open('classes_map.json', 'w') as f_classes_map:
-#     json.dump(classes_map, f_classes_map)
+with open('classes_map.p', 'wb') as f_classes_map:
+     pickle.dump(classes_map, f_classes_map, protocol=pickle.HIGHEST_PROTOCOL)
